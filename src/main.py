@@ -57,32 +57,32 @@ def extract_title(markdown):
 #     Write the new full HTML page to a file at dest_path. Be sure to create any necessary directories if they don't exist.
 
 
-def generate_page(from_path, template_path, dest_path, basepath):
-    print(f"Generating page from {from_path} to {dest_path} using {template_path}")
-    if not os.path.exists(from_path):
-        raise FileNotFoundError(f"Path {from_path} does not exist")
-    if not os.path.exists(template_path):
-        raise FileNotFoundError(f"Path {template_path} does not exist")
-    print("Reading files in paths...")
-    with open(from_path) as fpath:
-        read_from = fpath.read()
-    with open(template_path) as tpath:
-        read_temp = tpath.read()
-    print("Done reading files and now creating html content...")
-    html_content = markdown_to_html_node(read_from).to_html()
-    print("Done creating html content...")
-    print("Extracting title...")
-    title = extract_title(read_from)
-    print("Putting the Title and Content in the final html file. Please wait...")
-    final_html = read_temp.replace("{{ Title }}", title).replace("{{ Content }}", html_content).replace('href="/', f'href={basepath}').replace('src="/', f'src={basepath}')
-    print("On to the next step")
-    directory_path = os.path.dirname(dest_path)
-    if not os.path.exists(directory_path):
-        os.makedirs(directory_path)
-    with open(dest_path, "w") as f:
-        print("Waiting for file")
-        f.write(final_html)
-        print(dest_path + " " + "was made")
+# def generate_page(from_path, template_path, dest_path, basepath):
+#     print(f"Generating page from {from_path} to {dest_path} using {template_path}")
+#     if not os.path.exists(from_path):
+#         raise FileNotFoundError(f"Path {from_path} does not exist")
+#     if not os.path.exists(template_path):
+#         raise FileNotFoundError(f"Path {template_path} does not exist")
+#     print("Reading files in paths...")
+#     with open(from_path) as fpath:
+#         read_from = fpath.read()
+#     with open(template_path) as tpath:
+#         read_temp = tpath.read()
+#     print("Done reading files and now creating html content...")
+#     html_content = markdown_to_html_node(read_from).to_html()
+#     print("Done creating html content...")
+#     print("Extracting title...")
+#     title = extract_title(read_from)
+#     print("Putting the Title and Content in the final html file. Please wait...")
+#     final_html = read_temp.replace("{{ Title }}", title).replace("{{ Content }}", html_content).replace('href="/', f'href={basepath}').replace('src="/', f'src={basepath}')
+#     print("On to the next step")
+#     directory_path = os.path.dirname(dest_path)
+#     if not os.path.exists(directory_path):
+#         os.makedirs(directory_path)
+#     with open(dest_path, "w") as f:
+#         print("Waiting for file")
+#         f.write(final_html)
+#         print(dest_path + " " + "was made")
     
 
 def generate_pages_recursive(dir_path_content, template_path, dest_dir_path, basepath):
@@ -134,9 +134,9 @@ def main():
   print(f"This is what the basepath is: {basepath}")  
   script_dir = os.path.dirname(os.path.abspath(__file__))  
   get_files_ready(script_dir)
-  content_path = "content"
-  template_path = "template.html"
-  docs_path = "docs"
+  content_path = "./content"
+  template_path = "./template.html"
+  docs_path = "./docs"
   generate_pages_recursive(content_path, template_path, docs_path, basepath)  
     
     
