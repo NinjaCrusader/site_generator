@@ -25,8 +25,8 @@ def copy_static_to_public(source_path, dest_path):
 
 
 def get_files_ready(script_dir):
-    docs_dir = "docs"
-    static_dir = "static"
+    docs_dir = "./docs"
+    static_dir = "./static"
     if os.path.exists(docs_dir):
         shutil.rmtree(docs_dir)
         print("Content in docs dictionary was deleted!")
@@ -34,6 +34,7 @@ def get_files_ready(script_dir):
     if not os.path.exists(static_dir):
         print("Error: Static directory not found!")
         return
+    print(f"This is what the static file destination is: {static_dir}")
     copy_static_to_public(static_dir, docs_dir)
 
 
@@ -129,6 +130,8 @@ def main():
     basepath = sys.argv[1]
   else:
     basepath = '/'
+
+  print(f"This is what the basepath is: {basepath}")  
   script_dir = os.path.dirname(os.path.abspath(__file__))  
   get_files_ready(script_dir)
   content_path = "content"
